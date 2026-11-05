@@ -1,70 +1,47 @@
-# Einladung zum Punschstand 🎄
+# BBB Winterpunsch – Einladung mit Zu-/Absage 🎄
 
-Eine kleine Einladungs-Website mit zwei Buttons **„Ich komme“** / **„Ich komme nicht“**.
-Nach dem Klick gibt der Gast seinen Namen und (bei Zusage) die Anzahl Personen an –
-dann öffnet sich WhatsApp mit einer **fertig ausgefüllten Antwort an dich**. Der Gast
-muss nur noch auf „Senden“ tippen.
-
-Beispiel einer Antwort, die bei dir ankommt:
+Die Seite zeigt deine Einladung (`bilder/einladung.jpg`) mit zwei Buttons oben:
+**„Ich komme“** / **„Ich komme nicht“**. Der Gast gibt Namen und (bei Zusage) die
+Anzahl der Personen an. Danach öffnet sich WhatsApp mit einer fertigen Antwort an
+dich, und der Gast muss nur noch auf „Senden“ tippen:
 
 ```
 ✅ KOMME – Anna
 Personen: 3
-(Punschstand am Samstag, 12. Dezember 2026)
-
-Wir bringen Kekse
+(BBB Winterpunsch, Sa, 5. Dezember)
 ```
 
-## 1. Anpassen
+## 1. Deine WhatsApp-Nummer eintragen
 
-In `index.html` ganz unten den Block `CONFIG` bearbeiten:
+In `index.html` unten im Block `CONFIG` bei `telefon` deine Nummer eintragen:
+nur Ziffern, international, ohne `+`/`00`/führende `0`
+(z. B. 0664 1234567 → `436641234567`).
 
-| Feld        | Bedeutung |
-|-------------|-----------|
-| `telefon`   | **Deine** WhatsApp-Nummer, nur Ziffern im internationalen Format (0176 1234567 → `491761234567`) |
-| `datum`, `uhrzeit`, `ort`, `kartenLink` | Eckdaten |
-| `titel`, `gruss`, `text`, `gastgeber` | Texte der Einladung |
-| `maxPersonen` | Höchstanzahl beim Personen-Zähler |
+## 2. Online stellen (kostenlos, GitHub Pages)
 
-Danach die Bilder neu erzeugen (optional, braucht Node + Playwright):
-
-```
-node werkzeuge/bilder-erzeugen.js
-```
-
-Das erzeugt:
-- `bilder/einladung.png` – die gestaltete Einladung als Bild (zum Verschicken)
-- `bilder/vorschau.png` – das Vorschaubild, das WhatsApp unter dem Link anzeigt
-
-## 2. Online stellen (kostenlos mit GitHub Pages)
-
-1. Auf GitHub: **Settings → Pages → Build and deployment → Branch** wählen
-   (den Branch mit diesen Dateien, Ordner `/ (root)`) → **Save**.
-2. Nach ~1 Minute ist die Seite erreichbar unter
-   `https://jaylauda.github.io/EinladungPunschstand/`
-3. Falls die Adresse anders lautet: in `index.html` die `og:image`-URL oben anpassen.
+GitHub → **Settings → Pages → Branch** diesen Branch und `/ (root)` wählen → **Save**.
+Nach ca. einer Minute ist die Seite unter
+`https://jaylauda.github.io/EinladungPunschstand/` erreichbar.
 
 ## 3. Per WhatsApp verschicken
 
-Bild `bilder/einladung.png` schicken und als Bildunterschrift z. B.:
+Bild `bilder/einladung.jpg` schicken und als Text dazuschreiben:
 
 ```
-Hallo! 🎄 Ich lade dich herzlich zu meinem Punschstand ein.
-Sag mir bitte kurz Bescheid:
+Servus! 🎄 Am Samstag, 5. Dezember ab 17 Uhr gibt's wieder den BBB Winterpunsch – wir freuen uns auf dich!
+Bitte gib uns kurz Bescheid:
 
-👉 Ich komme: https://jaylauda.github.io/EinladungPunschstand/?antwort=ja
-👉 Ich komme nicht: https://jaylauda.github.io/EinladungPunschstand/?antwort=nein
+✅ Ich komme: https://jaylauda.github.io/EinladungPunschstand/?antwort=ja
+❌ Ich komme nicht: https://jaylauda.github.io/EinladungPunschstand/?antwort=nein
 ```
 
-Tipps:
+Alternativ nur den Link `https://jaylauda.github.io/EinladungPunschstand/` schicken.
+WhatsApp zeigt dann das Vorschaubild `bilder/vorschau.jpg` an.
+
 - `?antwort=ja` / `?antwort=nein` wählt die Antwort auf der Seite direkt vor.
-- Mit `&name=Anna` wird der Gast persönlich begrüßt und der Name ist schon ausgefüllt,
-  z. B. `…/?antwort=ja&name=Anna`.
+- Mit `&name=Anna` ist der Name schon ausgefüllt (z. B. `…/?antwort=ja&name=Anna`).
 
-## Warum nicht „direkt in WhatsApp“?
+## Warum muss der Gast noch auf „Senden“ tippen?
 
-- Ein Bild in WhatsApp kann keine anklickbaren Buttons enthalten.
-- Echte Antwort-Buttons, die **automatisch** zurücksenden, gibt es nur über die
-  kostenpflichtige **WhatsApp Business API** (mit Meta-Konto, Vorlagen-Freigabe, Server).
-- Aus Sicherheitsgründen darf keine Website/kein Link in WhatsApp eine Nachricht ohne
-  Bestätigung verschicken. Der Klick auf „Senden“ durch den Gast ist daher immer nötig.
+WhatsApp lässt aus Sicherheitsgründen keine Nachricht ohne Bestätigung verschicken.
+Echte Antwort-Buttons gibt es nur mit der kostenpflichtigen WhatsApp Business API.

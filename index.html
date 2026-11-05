@@ -3,77 +3,64 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Einladung zum Punschstand</title>
+  <title>BBB Winterpunsch – Einladung</title>
 
-  <!-- Vorschau, die WhatsApp beim Teilen des Links anzeigt.
-       og:image MUSS eine absolute URL sein – nach dem Aktivieren von GitHub Pages anpassen. -->
-  <meta property="og:title" content="Einladung zum Punschstand 🎄">
-  <meta property="og:description" content="Komm vorbei auf einen heißen Punsch! Bitte sag kurz Bescheid, ob du kommst.">
-  <meta property="og:image" content="https://jaylauda.github.io/EinladungPunschstand/bilder/vorschau.png">
+  <!-- Vorschau, die WhatsApp unter dem Link anzeigt (absolute URL nötig) -->
+  <meta property="og:title" content="BBB Winterpunsch 🎄 – Sa, 5. Dezember ab 17 Uhr">
+  <meta property="og:description" content="Bergan 40, 4702 Wallern. Bitte um kurze Zu- oder Absage – einfach hier antippen!">
+  <meta property="og:image" content="https://jaylauda.github.io/EinladungPunschstand/bilder/vorschau.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0f2418">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --nacht: #14213d;
-      --nacht-2: #1d2d50;
-      --beere: #9d1c32;
-      --beere-hell: #c2334b;
-      --gold: #e9b95d;
-      --creme: #fbf4e6;
+      --tanne: #0f2418;
+      --tanne-2: #173322;
+      --gold: #e2b866;
+      --gold-hell: #f0cf8a;
+      --creme: #f6ead2;
       --text: #2a2320;
-      --text-leise: #6b5d55;
-      --gruen: #2f7a4f;
-      --gruen-hell: #3c9563;
+      --leise: #6b5d55;
+      --gruen: #2f8a52;
+      --gruen-hell: #37a05f;
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; }
     body {
       min-height: 100vh;
       font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-      color: var(--text);
+      color: var(--creme);
       background:
-        radial-gradient(1200px 600px at 50% -10%, #2a3f6e 0%, transparent 60%),
-        linear-gradient(180deg, var(--nacht) 0%, var(--nacht-2) 100%);
+        radial-gradient(900px 500px at 50% -10%, #23472f 0%, transparent 60%),
+        linear-gradient(180deg, var(--tanne) 0%, #0a1810 100%);
       background-attachment: fixed;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 24px 16px 48px;
+      display: flex; justify-content: center; align-items: flex-start;
+      padding: 16px 16px 40px;
       overflow-x: hidden;
     }
+    .seite { width: 100%; max-width: 520px; }
 
-    /* Schneeflocken */
-    .schnee { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
-    .schnee span {
-      position: absolute; top: -10px; color: #fff; opacity: .7;
-      animation: fallen linear infinite;
+    /* ---- Die zwei Buttons oben ---- */
+    .leiste {
+      position: sticky; top: 0; z-index: 5;
+      margin: -16px -16px 0; padding: 14px 16px 12px;
+      background: linear-gradient(180deg, var(--tanne) 75%, rgba(15,36,24,0));
     }
-    @keyframes fallen { to { transform: translateY(110vh) rotate(360deg); } }
-    @media (prefers-reduced-motion: reduce) { .schnee { display: none; } }
-
-    .karte {
-      position: relative; z-index: 1;
-      width: 100%; max-width: 440px;
-      background: var(--creme);
-      border-radius: 22px;
-      box-shadow: 0 24px 60px rgba(0,0,0,.45);
-      overflow: hidden;
+    .frage {
+      font-family: "Dancing Script", cursive; font-size: 26px; color: var(--gold-hell);
+      text-align: center; margin: 0 0 8px;
     }
-
-    /* ---- Antwort-Leiste oben ---- */
-    .antwort-leiste {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-      padding: 14px; background: #fff;
-      border-bottom: 1px solid #eadfcc;
-    }
+    .buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .btn {
       appearance: none; border: 0; cursor: pointer;
-      font: inherit; font-weight: 600; font-size: 16px;
-      padding: 14px 12px; border-radius: 14px;
+      font: inherit; font-weight: 700; font-size: 16px;
+      padding: 15px 10px; border-radius: 14px;
       display: flex; align-items: center; justify-content: center; gap: 8px;
       transition: transform .08s ease, box-shadow .2s ease, background .2s ease;
       -webkit-tap-highlight-color: transparent;
@@ -81,140 +68,75 @@
     .btn:active { transform: scale(.97); }
     .btn-ja   { background: var(--gruen); color: #fff; }
     .btn-ja:hover { background: var(--gruen-hell); }
-    .btn-nein { background: #efe6d6; color: var(--text); }
-    .btn-nein:hover { background: #e6dac6; }
+    .btn-nein { background: var(--creme); color: var(--text); }
+    .btn-nein:hover { background: #fff6e4; }
     .btn[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--gold); }
 
-    /* ---- Kopf ---- */
-    .kopf {
-      position: relative;
-      padding: 34px 24px 28px;
-      text-align: center;
-      color: var(--creme);
-      background:
-        radial-gradient(300px 160px at 50% 110%, rgba(233,185,93,.35), transparent 70%),
-        linear-gradient(160deg, var(--beere) 0%, #6e1022 100%);
-    }
-    .kopf .tasse { width: 92px; height: 92px; margin: 0 auto 10px; display: block; }
-    .kopf .klein {
-      font-size: 13px; letter-spacing: .22em; text-transform: uppercase;
-      color: var(--gold); margin: 0 0 6px;
-    }
-    .kopf h1 {
-      font-family: "Playfair Display", Georgia, serif;
-      font-weight: 800; font-size: 40px; line-height: 1.05; margin: 0;
-    }
-    .kopf .gruss {
-      font-family: "Playfair Display", Georgia, serif; font-style: italic;
-      font-size: 19px; margin: 12px 0 0; color: #ffe9c2;
-    }
-    .girlande {
-      position: absolute; left: 0; right: 0; bottom: -1px; height: 14px;
-      background: radial-gradient(circle at 7px 0, var(--creme) 7px, transparent 7.5px) 0 0 / 14px 14px repeat-x;
-    }
-
-    /* ---- Inhalt ---- */
-    .inhalt { padding: 24px 24px 8px; }
-    .text { margin: 0 0 20px; line-height: 1.55; text-align: center; color: var(--text); }
-    .eckdaten { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 10px; }
-    .eckdaten li {
-      display: grid; grid-template-columns: 40px 1fr; align-items: center;
-      background: #fff; border: 1px solid #eadfcc; border-radius: 14px; padding: 10px 14px;
-    }
-    .eckdaten .icon { font-size: 22px; }
-    .eckdaten .label { font-size: 12px; color: var(--text-leise); text-transform: uppercase; letter-spacing: .08em; }
-    .eckdaten .wert { font-weight: 600; }
-    .eckdaten a { color: var(--beere); }
-
-    /* ---- Antwort-Formular ---- */
+    /* ---- Antwortformular ---- */
     .formular {
-      margin: 18px 24px 0; padding: 18px;
-      background: #fff; border: 2px solid var(--gold); border-radius: 16px;
+      margin: 4px 0 16px; padding: 18px;
+      background: var(--creme); color: var(--text);
+      border: 2px solid var(--gold); border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.35);
     }
     .formular[hidden] { display: none; }
-    .formular h2 {
-      font-family: "Playfair Display", Georgia, serif; font-size: 22px; margin: 0 0 14px;
-    }
+    .formular h2 { font-family: "Dancing Script", cursive; font-size: 30px; margin: 0 0 12px; color: #1d4a2e; }
     .feld { margin-bottom: 14px; }
+    .feld[hidden] { display: none; }
     .feld label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
     .feld input, .feld textarea {
       width: 100%; font: inherit; font-size: 16px;
-      padding: 12px 14px; border: 1px solid #d9ccb6; border-radius: 12px; background: #fffdf8;
+      padding: 12px 14px; border: 1px solid #d6c7a8; border-radius: 12px; background: #fffdf7; color: var(--text);
     }
-    .feld textarea { resize: vertical; min-height: 64px; }
-    .feld input:focus, .feld textarea:focus { outline: 3px solid rgba(233,185,93,.5); border-color: var(--gold); }
+    .feld textarea { resize: vertical; min-height: 60px; }
+    .feld input:focus, .feld textarea:focus { outline: 3px solid rgba(226,184,102,.55); border-color: var(--gold); }
 
     .zaehler { display: flex; align-items: center; gap: 12px; }
     .zaehler button {
       width: 48px; height: 48px; border-radius: 50%; border: 0; cursor: pointer;
-      background: var(--nacht); color: #fff; font-size: 24px; line-height: 1;
+      background: var(--tanne); color: #fff; font-size: 24px; line-height: 1;
     }
     .zaehler button:disabled { opacity: .35; cursor: default; }
     .zaehler output { min-width: 3ch; text-align: center; font-size: 28px; font-weight: 700; }
-    .zaehler .hinweis { color: var(--text-leise); font-size: 14px; }
+    .zaehler .hinweis { color: var(--leise); font-size: 14px; }
 
     .btn-senden { width: 100%; background: #25d366; color: #0b3d20; font-size: 17px; }
     .btn-senden:hover { background: #2fe072; }
     .btn-senden svg { width: 22px; height: 22px; }
-    .klein-hinweis { font-size: 13px; color: var(--text-leise); text-align: center; margin: 10px 0 0; }
+    .klein { font-size: 13px; color: var(--leise); text-align: center; margin: 10px 0 0; }
 
-    .fuss {
-      text-align: center; padding: 22px 24px 26px;
-      font-family: "Playfair Display", Georgia, serif; font-style: italic; color: var(--text-leise);
+    /* ---- Einladungsbild ---- */
+    .einladung {
+      display: block; width: 100%; height: auto;
+      border-radius: 18px; box-shadow: 0 20px 50px rgba(0,0,0,.5);
     }
+    .karte-link {
+      display: block; text-align: center; margin-top: 14px;
+      color: var(--gold-hell); font-weight: 600; text-decoration: none;
+    }
+    .karte-link:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
-  <div class="schnee" aria-hidden="true"></div>
-
-  <main class="karte" id="karte">
-    <!-- Die zwei Buttons ganz oben -->
-    <div class="antwort-leiste" role="group" aria-label="Deine Antwort">
-      <button class="btn btn-ja"   id="btn-ja"   aria-pressed="false">✔ Ich komme</button>
-      <button class="btn btn-nein" id="btn-nein" aria-pressed="false">✖ Ich komme nicht</button>
+  <div class="seite">
+    <div class="leiste">
+      <p class="frage">Bist du dabei?</p>
+      <div class="buttons" role="group" aria-label="Deine Antwort">
+        <button class="btn btn-ja"   id="btn-ja"   aria-pressed="false">✔ Ich komme</button>
+        <button class="btn btn-nein" id="btn-nein" aria-pressed="false">✖ Ich komme nicht</button>
+      </div>
     </div>
 
-    <header class="kopf">
-      <svg class="tasse" viewBox="0 0 100 100" aria-hidden="true">
-        <!-- Dampf -->
-        <path d="M38 30c-6-7 6-11 0-19M52 30c-6-7 6-11 0-19M66 30c-6-7 6-11 0-19"
-              stroke="#ffe9c2" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".85"/>
-        <!-- Henkel -->
-        <path d="M76 46h6a10 10 0 0 1 0 20h-7" stroke="#e9b95d" stroke-width="6" fill="none"/>
-        <!-- Becher -->
-        <path d="M22 38h56l-5 42a8 8 0 0 1-8 7H35a8 8 0 0 1-8-7z" fill="#e9b95d"/>
-        <path d="M24 44h52l-1 7H25z" fill="#9d1c32" opacity=".55"/>
-        <!-- Orangenscheibe -->
-        <circle cx="70" cy="38" r="9" fill="#f39a2b"/><circle cx="70" cy="38" r="6" fill="#ffc36b"/>
-        <!-- Sterne -->
-        <path d="M50 60l3 6 6 1-4.5 4 1 6-5.5-3-5.5 3 1-6-4.5-4 6-1z" fill="#fbf4e6"/>
-      </svg>
-      <p class="klein" id="t-anlass"></p>
-      <h1 id="t-titel"></h1>
-      <p class="gruss" id="t-gruss"></p>
-      <div class="girlande"></div>
-    </header>
-
-    <section class="inhalt">
-      <p class="text" id="t-text"></p>
-      <ul class="eckdaten">
-        <li><span class="icon">🎄</span><div><div class="label">Wann</div><div class="wert" id="t-datum"></div></div></li>
-        <li><span class="icon">🕔</span><div><div class="label">Uhrzeit</div><div class="wert" id="t-uhrzeit"></div></div></li>
-        <li><span class="icon">📍</span><div><div class="label">Wo</div><div class="wert" id="t-ort"></div></div></li>
-      </ul>
-    </section>
-
-    <!-- Antwortformular – erscheint nach Klick auf einen der Buttons -->
     <form class="formular" id="formular" hidden>
       <h2 id="f-titel"></h2>
 
       <div class="feld">
         <label for="f-name">Dein Name</label>
-        <input id="f-name" name="name" autocomplete="name" required placeholder="z. B. Anna Müller">
+        <input id="f-name" name="name" autocomplete="name" required placeholder="z. B. Anna Huber">
       </div>
 
       <div class="feld" id="feld-anzahl">
-        <label id="l-anzahl">Wie viele Personen kommen insgesamt (inkl. dir)?</label>
+        <label id="l-anzahl">Mit wie vielen Personen kommst du (inkl. dir)?</label>
         <div class="zaehler" role="group" aria-labelledby="l-anzahl">
           <button type="button" id="minus" aria-label="Eine Person weniger">−</button>
           <output id="anzahl" aria-live="polite">1</output>
@@ -225,68 +147,43 @@
 
       <div class="feld">
         <label for="f-notiz">Nachricht (optional)</label>
-        <textarea id="f-notiz" name="notiz" placeholder="z. B. Wir bringen Kekse mit 🍪"></textarea>
+        <textarea id="f-notiz" name="notiz"></textarea>
       </div>
 
       <button class="btn btn-senden" type="submit">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3.1.2.1.7-.1 1.3z"/></svg>
         Antwort per WhatsApp senden
       </button>
-      <p class="klein-hinweis">WhatsApp öffnet sich mit deiner fertigen Antwort – du musst nur noch auf „Senden“ tippen.</p>
+      <p class="klein">WhatsApp öffnet sich mit deiner fertigen Antwort – nur noch auf „Senden“ tippen.</p>
     </form>
 
-    <footer class="fuss" id="t-fuss"></footer>
-  </main>
+    <img class="einladung" src="bilder/einladung.jpg" width="843" height="1264"
+         alt="Einladung BBB Winterpunsch: Samstag, 5. Dezember, ab 17 Uhr, Bergan 40, 4702 Wallern. Es gibt Punsch, Glühmost, Bier, Anti und Leberkäse-Semmel. Auch ein Sitzbereich im Warmen ist vorhanden. Gerne auch Familie und Freunde mitnehmen!">
+
+    <a class="karte-link" href="https://www.google.com/maps/search/?api=1&query=Bergan+40%2C+4702+Wallern" target="_blank" rel="noopener">📍 Bergan 40, 4702 Wallern – Route anzeigen</a>
+  </div>
 
   <script>
     /* =====================================================================
        HIER ANPASSEN
        ===================================================================== */
     const CONFIG = {
-      // Deine WhatsApp-Nummer im internationalen Format, NUR Ziffern,
-      // ohne +, ohne 00, ohne führende 0.  Beispiel: 0176 1234567 → "491761234567"
-      telefon:   "491761234567",
-
-      anlass:    "Herzliche Einladung",
-      titel:     "zum Punschstand",
-      gruss:     "Lass uns gemeinsam auf den Winter anstoßen!",
-      text:      "Es gibt heißen Punsch, Glühwein, Kinderpunsch und Leckereien vom Grill. " +
-                 "Bring gerne gute Laune und warme Socken mit – wir freuen uns auf dich!",
-      datum:     "Samstag, 12. Dezember 2026",
-      uhrzeit:   "ab 17:00 Uhr",
-      ort:       "Bei uns im Hof, Musterstraße 1, 12345 Musterstadt",
-      // Optional: Link zu Google Maps (leer lassen = kein Link)
-      kartenLink:"https://maps.google.com/?q=Musterstra%C3%9Fe+1+12345+Musterstadt",
-      gastgeber: "Jay",
-      maxPersonen: 10,
+      // WhatsApp-Nummer, an die die Antworten gehen: internationales Format,
+      // NUR Ziffern, ohne +, ohne 00, ohne führende 0.
+      // Beispiel Österreich: 0664 1234567 → "436641234567"
+      telefon: "436641234567",
+      veranstaltung: "BBB Winterpunsch",
+      datum: "Sa, 5. Dezember",
+      maxPersonen: 15,
     };
     /* ===================================================================== */
 
     const $ = (id) => document.getElementById(id);
     const params = new URLSearchParams(location.search);
 
-    // Texte füllen
-    $("t-anlass").textContent  = CONFIG.anlass;
-    $("t-titel").textContent   = CONFIG.titel;
-    $("t-text").textContent    = CONFIG.text;
-    $("t-datum").textContent   = CONFIG.datum;
-    $("t-uhrzeit").textContent = CONFIG.uhrzeit;
-    $("t-fuss").textContent    = "Bis bald – " + CONFIG.gastgeber;
-    if (CONFIG.kartenLink) {
-      const a = document.createElement("a");
-      a.href = CONFIG.kartenLink; a.target = "_blank"; a.rel = "noopener";
-      a.textContent = CONFIG.ort;
-      $("t-ort").appendChild(a);
-    } else {
-      $("t-ort").textContent = CONFIG.ort;
-    }
-
-    // Personalisierte Links: ...?name=Anna
     const gastName = (params.get("name") || "").trim();
-    $("t-gruss").textContent = gastName ? `Liebe/r ${gastName}, ${CONFIG.gruss.charAt(0).toLowerCase()}${CONFIG.gruss.slice(1)}` : CONFIG.gruss;
     if (gastName) $("f-name").value = gastName;
 
-    // Auswahl
     let antwort = null;
     let anzahl = 1;
 
@@ -297,15 +194,14 @@
       $("plus").disabled  = anzahl >= CONFIG.maxPersonen;
     }
 
-    function waehle(wert, scrollen = true) {
+    function waehle(wert) {
       antwort = wert;
       $("btn-ja").setAttribute("aria-pressed", wert === "ja");
       $("btn-nein").setAttribute("aria-pressed", wert === "nein");
       $("formular").hidden = false;
       $("feld-anzahl").hidden = wert !== "ja";
-      $("f-titel").textContent = wert === "ja" ? "Schön, dass du kommst! 🎉" : "Schade! Danke fürs Bescheidsagen.";
-      $("f-notiz").placeholder = wert === "ja" ? "z. B. Wir bringen Kekse mit 🍪" : "z. B. Viel Spaß euch!";
-      if (scrollen) $("formular").scrollIntoView({ behavior: "smooth", block: "start" });
+      $("f-titel").textContent = wert === "ja" ? "Super, bis bald! 🎉" : "Schade! Danke fürs Bescheidsagen.";
+      $("f-notiz").placeholder = wert === "ja" ? "z. B. Wir kommen etwas später 🙂" : "z. B. Viel Spaß euch!";
     }
 
     $("btn-ja").addEventListener("click", () => waehle("ja"));
@@ -314,42 +210,23 @@
     $("plus").addEventListener("click", () => { if (anzahl < CONFIG.maxPersonen) anzahl++; zeigeAnzahl(); });
     zeigeAnzahl();
 
-    // Direktlinks aus der WhatsApp-Nachricht: ...?antwort=ja  bzw.  ...?antwort=nein
+    // Direktlinks aus der WhatsApp-Nachricht: ?antwort=ja / ?antwort=nein
     const vorauswahl = (params.get("antwort") || "").toLowerCase();
-    if (vorauswahl === "ja" || vorauswahl === "nein") waehle(vorauswahl, false);
+    if (vorauswahl === "ja" || vorauswahl === "nein") waehle(vorauswahl);
 
-    // Absenden → WhatsApp mit vorgefertigter Nachricht öffnen
     $("formular").addEventListener("submit", (e) => {
       e.preventDefault();
       const name = $("f-name").value.trim();
       if (!name) { $("f-name").focus(); return; }
       const notiz = $("f-notiz").value.trim();
 
-      let text;
-      if (antwort === "ja") {
-        text = `✅ KOMME – ${name}\n` +
-               `Personen: ${anzahl}\n` +
-               `(Punschstand am ${CONFIG.datum})`;
-      } else {
-        text = `❌ KOMME NICHT – ${name}\n` +
-               `(Punschstand am ${CONFIG.datum})`;
-      }
+      let text = antwort === "ja"
+        ? `✅ KOMME – ${name}\nPersonen: ${anzahl}\n(${CONFIG.veranstaltung}, ${CONFIG.datum})`
+        : `❌ KOMME NICHT – ${name}\n(${CONFIG.veranstaltung}, ${CONFIG.datum})`;
       if (notiz) text += `\n\n${notiz}`;
 
       location.href = `https://wa.me/${CONFIG.telefon}?text=${encodeURIComponent(text)}`;
     });
-
-    // Schnee
-    const schnee = document.querySelector(".schnee");
-    for (let i = 0; i < 28; i++) {
-      const s = document.createElement("span");
-      s.textContent = Math.random() > .5 ? "❄" : "•";
-      s.style.left = Math.random() * 100 + "vw";
-      s.style.fontSize = 8 + Math.random() * 14 + "px";
-      s.style.animationDuration = 8 + Math.random() * 12 + "s";
-      s.style.animationDelay = -Math.random() * 20 + "s";
-      schnee.appendChild(s);
-    }
   </script>
 </body>
 </html>
