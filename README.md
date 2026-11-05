@@ -1,8 +1,8 @@
 # BBB Winterpunsch – Einladung mit Zu-/Absage 🎄
 
-Die Seite zeigt deine Einladung (`bilder/einladung.jpg`) mit zwei Buttons oben:
+Die Seite zeigt deine Einladung (`bilder/einladung.jpg`) mit zwei Buttons unten (an Stelle von „Bitte um kurze Zu- oder Absage“):
 **„Ich komme“** / **„Ich komme nicht“**. Der Gast gibt Namen und (bei Zusage) die
-Anzahl der Personen an. Danach öffnet sich WhatsApp mit einer fertigen Antwort an
+Anzahl der Personen in einem kleinen Fenster an. Danach öffnet sich WhatsApp mit einer fertigen Antwort an
 dich, und der Gast muss nur noch auf „Senden“ tippen:
 
 ```
@@ -38,7 +38,7 @@ Bitte gib uns kurz Bescheid:
 Alternativ nur den Link `https://jaylauda.github.io/EinladungPunschstand/` schicken.
 WhatsApp zeigt dann das Vorschaubild `bilder/vorschau.jpg` an.
 
-- `?antwort=ja` / `?antwort=nein` wählt die Antwort auf der Seite direkt vor.
+- `?antwort=ja` / `?antwort=nein` öffnet das Antwort-Fenster direkt mit der passenden Auswahl.
 - Mit `&name=Anna` ist der Name schon ausgefüllt (z. B. `…/?antwort=ja&name=Anna`).
 
 ## Warum muss der Gast noch auf „Senden“ tippen?

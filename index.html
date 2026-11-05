@@ -46,17 +46,6 @@
     }
     .seite { width: 100%; max-width: 520px; }
 
-    /* ---- Die zwei Buttons oben ---- */
-    .leiste {
-      position: sticky; top: 0; z-index: 5;
-      margin: -16px -16px 0; padding: 14px 16px 12px;
-      background: linear-gradient(180deg, var(--tanne) 75%, rgba(15,36,24,0));
-    }
-    .frage {
-      font-family: "Dancing Script", cursive; font-size: 26px; color: var(--gold-hell);
-      text-align: center; margin: 0 0 8px;
-    }
-    .buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .btn {
       appearance: none; border: 0; cursor: pointer;
       font: inherit; font-weight: 700; font-size: 16px;
@@ -66,21 +55,58 @@
       -webkit-tap-highlight-color: transparent;
     }
     .btn:active { transform: scale(.97); }
-    .btn-ja   { background: var(--gruen); color: #fff; }
-    .btn-ja:hover { background: var(--gruen-hell); }
-    .btn-nein { background: var(--creme); color: var(--text); }
-    .btn-nein:hover { background: #fff6e4; }
-    .btn[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--gold); }
+
+    /* ---- Einladung mit Buttons an Stelle von "Bitte um kurze Zu- oder Absage" ---- */
+    .einladung-rahmen { position: relative; container-type: inline-size; }
+    .antwort-buttons {
+      position: absolute; left: 9%; right: 9%; top: 89%; height: 7.6%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.2cqw;
+      padding: .9cqw; border-radius: 999px;
+      background: linear-gradient(180deg, #f1dfc0 0%, #dcc093 100%);
+      box-shadow: 0 4px 16px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.6);
+      animation: puls 2.4s ease-in-out infinite;
+    }
+    .antwort-buttons .btn {
+      padding: 0 4px; gap: .35em; white-space: nowrap;
+      font-size: clamp(12px, 4cqw, 22px); border-radius: 999px;
+    }
+    .antwort-buttons .btn-ja   { background: var(--gruen); color: #fff; }
+    .antwort-buttons .btn-ja:hover { background: var(--gruen-hell); }
+    .antwort-buttons .btn-nein { background: #fbf2e1; color: #1f1a15; }
+    .antwort-buttons .btn-nein:hover { background: #fff; }
+    .antwort-buttons .symbol { font-size: 1.1em; line-height: 1; }
+    .antwort-buttons .btn-nein .symbol { color: #a32035; }
+    @keyframes puls {
+      0%, 100% { box-shadow: 0 4px 16px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.6), 0 0 0 0 rgba(226,184,102,0); }
+      50%      { box-shadow: 0 4px 16px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.6), 0 0 0 5px rgba(226,184,102,.5); }
+    }
+    @media (prefers-reduced-motion: reduce) { .antwort-buttons .btn { animation: none; } }
+
+    /* ---- Antwort-Fenster ---- */
+    dialog {
+      width: min(460px, calc(100vw - 32px)); max-height: calc(100vh - 32px);
+      padding: 0; border: 0; background: transparent; overflow: visible;
+    }
+    dialog::backdrop { background: rgba(5,14,9,.72); backdrop-filter: blur(3px); }
+    .schliessen {
+      position: absolute; top: 10px; right: 10px;
+      width: 36px; height: 36px; border-radius: 50%; border: 0; cursor: pointer;
+      background: #eadcc0; color: var(--text); font-size: 20px; line-height: 1;
+    }
 
     /* ---- Antwortformular ---- */
     .formular {
-      margin: 4px 0 16px; padding: 18px;
+      position: relative; margin: 0; padding: 18px; max-height: calc(100vh - 32px); overflow-y: auto;
       background: var(--creme); color: var(--text);
       border: 2px solid var(--gold); border-radius: 16px;
       box-shadow: 0 12px 30px rgba(0,0,0,.35);
     }
     .formular[hidden] { display: none; }
-    .formular h2 { font-family: "Dancing Script", cursive; font-size: 30px; margin: 0 0 12px; color: #1d4a2e; }
+    .formular h2 { font-family: "Dancing Script", cursive; font-size: 30px; margin: 0 40px 12px 0; color: #1d4a2e; }
+    .wahl { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+    .wahl .btn { font-size: 14px; padding: 12px 4px; white-space: nowrap; background: #eadcc0; color: var(--text); }
+    .wahl .btn[aria-pressed="true"].btn-ja   { background: var(--gruen); color: #fff; }
+    .wahl .btn[aria-pressed="true"].btn-nein { background: #a32035; color: #fff; }
     .feld { margin-bottom: 14px; }
     .feld[hidden] { display: none; }
     .feld label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
@@ -119,16 +145,26 @@
 </head>
 <body>
   <div class="seite">
-    <div class="leiste">
-      <p class="frage">Bist du dabei?</p>
-      <div class="buttons" role="group" aria-label="Deine Antwort">
-        <button class="btn btn-ja"   id="btn-ja"   aria-pressed="false">✔ Ich komme</button>
-        <button class="btn btn-nein" id="btn-nein" aria-pressed="false">✖ Ich komme nicht</button>
+    <div class="einladung-rahmen">
+      <img class="einladung" src="bilder/einladung.jpg" width="843" height="1264"
+           alt="Einladung BBB Winterpunsch: Samstag, 5. Dezember, ab 17 Uhr, Bergan 40, 4702 Wallern. Es gibt Punsch, Glühmost, Bier, Anti und Leberkäse-Semmel. Auch ein Sitzbereich im Warmen ist vorhanden. Gerne auch Familie und Freunde mitnehmen!">
+      <div class="antwort-buttons" role="group" aria-label="Bitte um kurze Zu- oder Absage">
+        <button class="btn btn-ja"   id="btn-ja"><span class="symbol">✔</span> Ich komme</button>
+        <button class="btn btn-nein" id="btn-nein"><span class="symbol">✖</span> Ich komme nicht</button>
       </div>
     </div>
 
-    <form class="formular" id="formular" hidden>
+    <a class="karte-link" href="https://www.google.com/maps/search/?api=1&query=Bergan+40%2C+4702+Wallern" target="_blank" rel="noopener">📍 Bergan 40, 4702 Wallern – Route anzeigen</a>
+  </div>
+
+  <dialog id="fenster">
+    <form class="formular" id="formular">
+      <button type="button" class="schliessen" id="schliessen" aria-label="Schließen">✕</button>
       <h2 id="f-titel"></h2>
+      <div class="wahl" role="group" aria-label="Deine Antwort">
+        <button type="button" class="btn btn-ja"   id="wahl-ja"   aria-pressed="false">✔ Ich komme</button>
+        <button type="button" class="btn btn-nein" id="wahl-nein" aria-pressed="false">✖ Ich komme nicht</button>
+      </div>
 
       <div class="feld">
         <label for="f-name">Dein Name</label>
@@ -156,12 +192,7 @@
       </button>
       <p class="klein">WhatsApp öffnet sich mit deiner fertigen Antwort – nur noch auf „Senden“ tippen.</p>
     </form>
-
-    <img class="einladung" src="bilder/einladung.jpg" width="843" height="1264"
-         alt="Einladung BBB Winterpunsch: Samstag, 5. Dezember, ab 17 Uhr, Bergan 40, 4702 Wallern. Es gibt Punsch, Glühmost, Bier, Anti und Leberkäse-Semmel. Auch ein Sitzbereich im Warmen ist vorhanden. Gerne auch Familie und Freunde mitnehmen!">
-
-    <a class="karte-link" href="https://www.google.com/maps/search/?api=1&query=Bergan+40%2C+4702+Wallern" target="_blank" rel="noopener">📍 Bergan 40, 4702 Wallern – Route anzeigen</a>
-  </div>
+  </dialog>
 
   <script>
     /* =====================================================================
@@ -196,23 +227,32 @@
 
     function waehle(wert) {
       antwort = wert;
-      $("btn-ja").setAttribute("aria-pressed", wert === "ja");
-      $("btn-nein").setAttribute("aria-pressed", wert === "nein");
-      $("formular").hidden = false;
+      $("wahl-ja").setAttribute("aria-pressed", wert === "ja");
+      $("wahl-nein").setAttribute("aria-pressed", wert === "nein");
       $("feld-anzahl").hidden = wert !== "ja";
       $("f-titel").textContent = wert === "ja" ? "Super, bis bald! 🎉" : "Schade! Danke fürs Bescheidsagen.";
       $("f-notiz").placeholder = wert === "ja" ? "z. B. Wir kommen etwas später 🙂" : "z. B. Viel Spaß euch!";
     }
 
-    $("btn-ja").addEventListener("click", () => waehle("ja"));
-    $("btn-nein").addEventListener("click", () => waehle("nein"));
+    function oeffne(wert) {
+      waehle(wert);
+      if (!$("fenster").open) $("fenster").showModal();
+    }
+
+    $("btn-ja").addEventListener("click", () => oeffne("ja"));
+    $("btn-nein").addEventListener("click", () => oeffne("nein"));
+    $("wahl-ja").addEventListener("click", () => waehle("ja"));
+    $("wahl-nein").addEventListener("click", () => waehle("nein"));
+    $("schliessen").addEventListener("click", () => $("fenster").close());
+    // Klick auf den abgedunkelten Hintergrund schließt das Fenster
+    $("fenster").addEventListener("click", (e) => { if (e.target === $("fenster")) $("fenster").close(); });
     $("minus").addEventListener("click", () => { if (anzahl > 1) anzahl--; zeigeAnzahl(); });
     $("plus").addEventListener("click", () => { if (anzahl < CONFIG.maxPersonen) anzahl++; zeigeAnzahl(); });
     zeigeAnzahl();
 
     // Direktlinks aus der WhatsApp-Nachricht: ?antwort=ja / ?antwort=nein
     const vorauswahl = (params.get("antwort") || "").toLowerCase();
-    if (vorauswahl === "ja" || vorauswahl === "nein") waehle(vorauswahl);
+    if (vorauswahl === "ja" || vorauswahl === "nein") oeffne(vorauswahl);
 
     $("formular").addEventListener("submit", (e) => {
       e.preventDefault();
